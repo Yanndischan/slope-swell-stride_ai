@@ -1,4 +1,6 @@
-import React, { Suspense, Component } from "react";
+import fs from 'fs';
+
+const appJsx = `import React, { Suspense, Component } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 // 1. Error Boundary specific to pages so the whole app never crashes
@@ -93,3 +95,7 @@ export default function App() {
     </BrowserRouter>
   );
 }
+`;
+
+fs.writeFileSync('App.jsx', appJsx);
+console.log("✓ App.jsx rewritten with CV-safe dynamic routing.");
