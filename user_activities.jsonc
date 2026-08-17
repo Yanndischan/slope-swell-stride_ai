@@ -1,0 +1,53 @@
+{
+  "name": "user_activities",
+  "type": "object",
+  "properties": {
+    "activity_type": {
+      "type": "string",
+      "enum": [
+        "surf",
+        "ski",
+        "run"
+      ],
+      "title": "Activity Type",
+      "description": "Swell (surf), Slope (ski), or Stride (run)"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "title": "Duration (seconds)",
+      "description": "Total duration of the activity in seconds"
+    },
+    "distance_meters": {
+      "type": "number",
+      "title": "Distance (meters)",
+      "description": "Total distance covered in meters"
+    },
+    "heart_rate_avg": {
+      "type": "number",
+      "title": "Average Heart Rate (bpm)",
+      "description": "Average heart rate during the activity"
+    },
+    "wind_condition": {
+      "type": "number",
+      "title": "Wind Condition (mph)",
+      "description": "Recorded wind speed during the activity"
+    },
+    "wave_or_snow_metric": {
+      "type": "number",
+      "title": "Wave / Snow Metric",
+      "description": "Wave height (ft) for surf or snow depth (cm) for ski"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp",
+      "description": "When the activity was recorded"
+    }
+  },
+  "required": [
+    "activity_type",
+    "duration_seconds",
+    "distance_meters",
+    "timestamp"
+  ]
+}

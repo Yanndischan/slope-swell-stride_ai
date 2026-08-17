@@ -1,0 +1,113 @@
+{
+  "name": "saved_searches",
+  "type": "object",
+  "properties": {
+    "destination_name": {
+      "type": "string",
+      "title": "Destination Name",
+      "description": "Human-readable destination or city name"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude",
+      "description": "Resolved latitude coordinate"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude",
+      "description": "Resolved longitude coordinate"
+    },
+    "active_mode": {
+      "type": "string",
+      "enum": [
+        "surf",
+        "ski",
+        "run"
+      ],
+      "title": "Active Mode",
+      "description": "Swell (surf), Slope (ski), or Stride (run)"
+    },
+    "reminder_enabled": {
+      "type": "boolean",
+      "title": "Reminder Enabled",
+      "description": "Whether condition alerts are enabled for this trip",
+      "default": false
+    },
+    "reminder_lead_days": {
+      "type": "number",
+      "title": "Reminder Lead Days",
+      "description": "Number of days before departure to trigger the alert",
+      "default": 3
+    },
+    "reminder_channels": {
+      "type": "array",
+      "title": "Reminder Channels",
+      "description": "Selected notification channels (in-app push, email digest)",
+      "items": {
+        "type": "string",
+        "enum": [
+          "in_app",
+          "email"
+        ]
+      },
+      "default": []
+    },
+    "reminder_timing": {
+      "type": "string",
+      "enum": [
+        "3_days_before",
+        "morning_of"
+      ],
+      "title": "Reminder Timing",
+      "description": "When to trigger the condition alert",
+      "default": "3_days_before"
+    }
+  },
+  "required": [
+    "destination_name",
+    "latitude",
+    "longitude",
+    "active_mode"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

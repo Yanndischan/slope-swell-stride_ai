@@ -1,0 +1,91 @@
+{
+  "name": "trip_itineraries",
+  "type": "object",
+  "properties": {
+    "destination": {
+      "type": "string",
+      "title": "Destination",
+      "description": "Trip destination or city name"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Start Date",
+      "description": "Trip start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "title": "End Date",
+      "description": "Trip end date"
+    },
+    "day_number": {
+      "type": "number",
+      "title": "Day Number",
+      "description": "Which day of the trip (1-indexed)"
+    },
+    "activity_slot": {
+      "type": "string",
+      "enum": [
+        "morning",
+        "afternoon",
+        "evening"
+      ],
+      "title": "Activity Slot",
+      "description": "Time of day for the scheduled activity"
+    },
+    "custom_notes": {
+      "type": "string",
+      "title": "Custom Notes",
+      "description": "User notes about the planned activity"
+    }
+  },
+  "required": [
+    "destination",
+    "start_date",
+    "end_date",
+    "day_number",
+    "activity_slot"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
